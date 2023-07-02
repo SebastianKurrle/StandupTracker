@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using StandupTracker.Applications;
 using StandupTracker.Applications.Dtos;
 using StandupTracker.Applications.Services.Authentication;
+using StandupTracker.Applications.Validations;
 using StandupTracker.Authentication;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +30,16 @@ namespace StandupTracker
         public MainWindow()
         {
             InitializeComponent();
+
+            IMapper mapper = new MapperConfiguration(cfg =>
+                cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
+
+            UserCreateValidator validator = new UserCreateValidator();
+
+            AuthenticationCreateService authenticationCreateService = new AuthenticationCreateService(
+                mapper, validator);
+
+            authenticationCreateService.CreateUser(new UserCreate("Test2", "testing321", "testing321"));
         }
     }
 }

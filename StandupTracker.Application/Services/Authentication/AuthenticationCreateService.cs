@@ -2,6 +2,7 @@
 using FluentValidation;
 using StandupTracker.Applications.Contracts;
 using StandupTracker.Applications.Dtos;
+using StandupTracker.Applications.Exeptions;
 using StandupTracker.Applications.Validations;
 using StandupTracker.Database;
 using StandupTracker.Database.DBActions;
@@ -26,6 +27,9 @@ public class AuthenticationCreateService
         UserCreateValidator.ValidateAndThrow(userCreate);
         var user = Mapper.Map<User>(userCreate);
 
+        if (UserActions.CheckIfUserExists(user))
+            throw new UserAlreadyExistsExeption();
+        
         UserActions.UserCreateAction(user);
     }
 

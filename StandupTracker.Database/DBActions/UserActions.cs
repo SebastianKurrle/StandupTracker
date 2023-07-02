@@ -15,4 +15,22 @@ public class UserActions
             initDB.Context.SaveChanges();
         }
     }
+
+    public static bool CheckIfUserExists(User user)
+    {
+        InitDB initDB = new();
+
+        using(initDB.Context)
+        {
+            var users = initDB.Context.Users;
+
+            foreach (User u in users)
+            {
+                if (u.Username.Equals(user.Username))
+                    return true;
+            }
+
+            return false;
+        }
+    }
 }
