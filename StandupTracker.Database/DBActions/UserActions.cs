@@ -1,4 +1,5 @@
 ﻿using StandupTracker.Database.Entities;
+using StandupTracker.Database.Exeptions;
 
 namespace StandupTracker.Database.DBActions;
 
@@ -32,5 +33,22 @@ public class UserActions
 
             return false;
         }
+    }
+
+    public static User GetUserByUsername(string username)
+    {
+        InitDB initDB = new();
+
+        var user = new User();
+
+        using (initDB.Context)
+        {
+            user = initDB.Context.Users.FirstOrDefault(user => user.Username.Equals(username));
+        }
+
+        if (user == null)
+            throw new UserNotFoundExeption();
+
+        return user;
     }
 }

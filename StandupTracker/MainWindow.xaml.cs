@@ -30,16 +30,15 @@ namespace StandupTracker
         public MainWindow()
         {
             InitializeComponent();
-
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
+            cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
 
-            UserCreateValidator validator = new UserCreateValidator();
+            UserLoginValidator validator = new UserLoginValidator();
 
-            AuthenticationCreateService authenticationCreateService = new AuthenticationCreateService(
-                mapper, validator);
+            AuthenticationLoginService authenticationLoginService = 
+                new AuthenticationLoginService(mapper, validator);
 
-            authenticationCreateService.CreateUser(new UserCreate("Test2", "testing321", "testing321"));
+            authenticationLoginService.LoginUser(new UserLogin("Test", "testing321"));
         }
     }
 }

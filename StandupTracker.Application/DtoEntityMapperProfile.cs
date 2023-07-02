@@ -13,5 +13,10 @@ public class DtoEntityMapperProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => 
             Hash.Hash_SHA256(src.Password)));
+
+        CreateMap<UserLogin, User>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Password, opt => opt.MapFrom(src =>
+            Hash.Hash_SHA256(src.Password)));
     }
 }
