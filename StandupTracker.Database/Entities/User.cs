@@ -6,6 +6,11 @@ namespace StandupTracker.Database.Entities;
 
 public class User
 {
+    public User()
+    {
+        Id = Guid.NewGuid();
+    }
+
     [Key]
     public Guid Id { get; set; }
     [Required]

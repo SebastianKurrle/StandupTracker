@@ -1,11 +1,11 @@
-﻿using StandupTracker.DB;
-
-namespace StandupTracker.Database;
+﻿namespace StandupTracker.Database;
 
 public class InitDB
 {
+    public StandupTrackerContext Context { get; set; }
+
     public InitDB()
     {
-        StandupTrackerContext context = new StandupTrackerContext();
+        Context = new StandupTrackerContext();
     }
 }

@@ -1,22 +1,22 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using StandupTracker.Application.Contracts;
-using StandupTracker.Application.Dtos;
-using StandupTracker.Application.Validations;
+using StandupTracker.Applications.Contracts;
+using StandupTracker.Applications.Dtos;
+using StandupTracker.Applications.Validations;
+using StandupTracker.Database;
+using StandupTracker.Database.DBActions;
 using StandupTracker.Database.Entities;
 
-namespace StandupTracker.Application.Services.Authentication;
+namespace StandupTracker.Applications.Services.Authentication;
 
 public class AuthenticationCreateService
 {
-    public IUserRepository UserRepository { get; }
     public IMapper Mapper { get; }
     public UserCreateValidator UserCreateValidator { get; }
 
-    public AuthenticationCreateService(IUserRepository userRepository, IMapper mapper,
+    public AuthenticationCreateService(IMapper mapper,
         UserCreateValidator userCreateValidator)
     {
-        UserRepository = userRepository;
         Mapper = mapper;
         UserCreateValidator = userCreateValidator;
     }
@@ -25,8 +25,8 @@ public class AuthenticationCreateService
     {
         UserCreateValidator.ValidateAndThrow(userCreate);
         var user = Mapper.Map<User>(userCreate);
-        
-        
+
+        UserActions.UserCreateAction(user);
     }
 
 }

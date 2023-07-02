@@ -7,4 +7,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StandupTracker.Application\StandupTracker.Applications.csproj" />
+  </ItemGroup>
+
 </Project>

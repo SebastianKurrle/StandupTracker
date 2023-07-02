@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using StandupTracker.Applications.Dtos;
+using StandupTracker.Applications.Services.Authentication;
+using StandupTracker.Authentication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

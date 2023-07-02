@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StandupTracker.Application\StandupTracker.Application.csproj" />
+    <ProjectReference Include="..\StandupTracker.Application\StandupTracker.Applications.csproj" />
   </ItemGroup>
 
 </Project>

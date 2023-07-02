@@ -1,18 +1,19 @@
 ﻿namespace StandupTracker.Database.Migrations
 {
+    using StandupTracker.Database;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<StandupTracker.DB.StandupTrackerContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<StandupTrackerContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(StandupTracker.DB.StandupTrackerContext context)
+        protected override void Seed(StandupTrackerContext context)
         {
             //  This method will be called after migrating to the latest version.
 

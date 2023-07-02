@@ -1,5 +1,5 @@
 ﻿using StandupTracker.Application.Dtos;
-using StandupTracker.Application.Validations;
+using StandupTracker.Applications.Validations;
 
 namespace StandupTracker.Tests.Validation;
 

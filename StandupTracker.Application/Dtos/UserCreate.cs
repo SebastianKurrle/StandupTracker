@@ -1,3 +1,3 @@
-﻿namespace StandupTracker.Application.Dtos;
+﻿namespace StandupTracker.Applications.Dtos;
 
-public record UserCreate(string Username, string Password1, string Password2);
+public record UserCreate(string Username, string Password, string Password2);

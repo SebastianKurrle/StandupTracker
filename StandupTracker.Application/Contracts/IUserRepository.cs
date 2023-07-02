@@ -1,4 +1,4 @@
-﻿namespace StandupTracker.Application.Contracts;
+﻿namespace StandupTracker.Applications.Contracts;
 
 public interface IUserRepository
 {

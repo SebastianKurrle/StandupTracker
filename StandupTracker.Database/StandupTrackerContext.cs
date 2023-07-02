@@ -3,12 +3,12 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Runtime.CompilerServices;
 
-namespace StandupTracker.DB;
+namespace StandupTracker.Database;
 
 public class StandupTrackerContext : DbContext
 {
     public StandupTrackerContext() : base(GetConnectionString())
-    {    
+    {
     }
 
     public static string GetConnectionString()

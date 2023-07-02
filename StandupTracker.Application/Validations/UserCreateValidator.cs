@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using StandupTracker.Application.Dtos;
+using StandupTracker.Applications.Dtos;
 
-namespace StandupTracker.Application.Validations;
+namespace StandupTracker.Applications.Validations;
 
 public class UserCreateValidator : AbstractValidator<UserCreate>
 {
@@ -15,7 +15,7 @@ public class UserCreateValidator : AbstractValidator<UserCreate>
     public UserCreateValidator()
     {
         RuleFor(user => user.Username).NotEmpty().MaximumLength(50);
-        RuleFor(user => user.Password1).NotEmpty().MinimumLength(8);
-        RuleFor(user => user.Password2).NotEmpty().MinimumLength(8).Equal(user => user.Password1);
+        RuleFor(user => user.Password).NotEmpty().MinimumLength(8);
+        RuleFor(user => user.Password2).NotEmpty().MinimumLength(8).Equal(user => user.Password);
     }
 }
