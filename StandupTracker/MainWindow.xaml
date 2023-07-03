@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:StandupTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" RenderTransformOrigin="0.495,0.502">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--Title-->
+        <StackPanel Background="CadetBlue">
+            <Label FontSize="24" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,15,0,0">Tracker zum Aufstehen</Label>
+        </StackPanel>
+        
+        <!--Menu-->
+        <StackPanel Background="CadetBlue" Grid.Column="1">
+            <ComboBox Margin="0,30,10,0" Width="200" HorizontalAlignment="Right"/>
+        </StackPanel>
     </Grid>
 </Window>

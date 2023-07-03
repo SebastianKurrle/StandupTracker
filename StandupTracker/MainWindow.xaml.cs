@@ -32,19 +32,6 @@ namespace StandupTracker
         public MainWindow()
         {
             InitializeComponent();
-
-            IMapper mapper = new MapperConfiguration(cfg =>
-            cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
-
-            UserLoginValidator validator = new UserLoginValidator();
-
-            AuthenticationLoginService authenticationLoginService = 
-                new AuthenticationLoginService(mapper, validator);
-
-            string token = authenticationLoginService.LoginUser(new UserLogin("Test", "testing321"));
-            LoggedInUser loggedInUser = authenticationLoginService.GetLoggedInUserFromToken(token);
-
-            Debug.WriteLine(loggedInUser);
         }
     }
 }
