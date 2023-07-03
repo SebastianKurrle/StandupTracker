@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Standuptracker.AuthenticationTokens.Dtos;
 using StandupTracker.Applications;
 using StandupTracker.Applications.Dtos;
 using StandupTracker.Applications.Services.Authentication;
@@ -7,6 +8,7 @@ using StandupTracker.Authentication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +41,10 @@ namespace StandupTracker
             AuthenticationLoginService authenticationLoginService = 
                 new AuthenticationLoginService(mapper, validator);
 
-            authenticationLoginService.LoginUser(new UserLogin("Test", "testing321"));
+            string token = authenticationLoginService.LoginUser(new UserLogin("Test", "testing321"));
+            LoggedInUser loggedInUser = authenticationLoginService.GetLoggedInUserFromToken(token);
+
+            Debug.WriteLine(loggedInUser);
         }
     }
 }

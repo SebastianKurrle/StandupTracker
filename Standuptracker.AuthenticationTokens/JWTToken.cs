@@ -40,19 +40,26 @@ public class JWTToken
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    public static void GetLoggedInUserFromToken(string tokenString)
+    public static LoggedInUser GetLoggedInUserFromToken(string tokenString)
     {
-        LoggedInUser loggedInUser = new("", "");
-
         JwtSecurityTokenHandler tokenHandler = new();
 
         JwtSecurityToken token = tokenHandler.ReadJwtToken(tokenString);
 
         IEnumerable<Claim> claims = token.Claims;
 
+        string id = "";
+        string username = "";
+
         foreach (Claim claim in claims)
         {
-            Debug.WriteLine(claim);
+            if (claim.Type == "id")
+                id = claim.Value;
+
+            if (claim.Type == "username")
+                username = claim.Value;
         }
+
+        return new LoggedInUser(id, username);
     }
 }

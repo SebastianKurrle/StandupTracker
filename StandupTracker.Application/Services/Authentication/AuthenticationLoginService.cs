@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Standuptracker.AuthenticationTokens;
+using Standuptracker.AuthenticationTokens.Dtos;
 using StandupTracker.Applications.Dtos;
 using StandupTracker.Applications.Exeptions;
 using StandupTracker.Applications.Validations;
@@ -36,6 +37,11 @@ public class AuthenticationLoginService
 
         string token = JWTToken.CreateToken(dbUser);
         return token;
+    }
+
+    public LoggedInUser GetLoggedInUserFromToken(string token)
+    {
+        return JWTToken.GetLoggedInUserFromToken(token);
     }
 
     private bool CheckIfPasswordsMatching(User requestLoginUser, User dbUser)
