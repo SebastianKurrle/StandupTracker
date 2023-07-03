@@ -30,6 +30,7 @@ namespace StandupTracker
         public MainWindow()
         {
             InitializeComponent();
+
             IMapper mapper = new MapperConfiguration(cfg =>
             cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
 

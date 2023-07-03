@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Standuptracker.AuthenticationTokens.Dtos;
+using System.Diagnostics;
 
 namespace Standuptracker.AuthenticationTokens;
 
@@ -36,5 +38,21 @@ public class JWTToken
         );  
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public static void GetLoggedInUserFromToken(string tokenString)
+    {
+        LoggedInUser loggedInUser = new("", "");
+
+        JwtSecurityTokenHandler tokenHandler = new();
+
+        JwtSecurityToken token = tokenHandler.ReadJwtToken(tokenString);
+
+        IEnumerable<Claim> claims = token.Claims;
+
+        foreach (Claim claim in claims)
+        {
+            Debug.WriteLine(claim);
+        }
     }
 }

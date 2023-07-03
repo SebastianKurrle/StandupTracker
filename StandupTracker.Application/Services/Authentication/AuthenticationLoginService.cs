@@ -29,12 +29,13 @@ public class AuthenticationLoginService
         if (UserActions.CheckIfUserExists(user) == false)
             throw new UserNotFoundExeption();
 
-        var dbUser = UserActions.GetUserByUsername(user.Username);
+        User dbUser = UserActions.GetUserByUsername(user.Username);
 
         if (CheckIfPasswordsMatching(user, dbUser) == false)
             throw new IncorrectCredentialsException();
 
-        return JWTToken.CreateToken(dbUser);
+        string token = JWTToken.CreateToken(dbUser);
+        return token;
     }
 
     private bool CheckIfPasswordsMatching(User requestLoginUser, User dbUser)
