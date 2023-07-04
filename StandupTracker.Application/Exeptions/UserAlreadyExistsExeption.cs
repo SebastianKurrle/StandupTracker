@@ -3,7 +3,7 @@
 namespace StandupTracker.Applications.Exeptions;
 
 [Serializable]
-internal class UserAlreadyExistsExeption : Exception
+public class UserAlreadyExistsExeption : Exception
 {
     public UserAlreadyExistsExeption()
     {

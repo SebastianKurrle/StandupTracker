@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StandupTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" RenderTransformOrigin="0.495,0.502">
+    <Grid x:Name="windowLayout" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" RenderTransformOrigin="0.495,0.502">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -23,7 +23,13 @@
         
         <!--Menu-->
         <StackPanel Background="CadetBlue" Grid.Column="1">
-            <ComboBox Margin="0,30,10,0" Width="200" HorizontalAlignment="Right"/>
+            <ComboBox x:Name="menuControl" SelectionChanged="menuControl_SelectionChanged" Margin="0,30,10,0" Width="200" HorizontalAlignment="Right">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
     </Grid>
 </Window>

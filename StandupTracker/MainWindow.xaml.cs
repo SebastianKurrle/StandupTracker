@@ -5,6 +5,9 @@ using StandupTracker.Applications.Dtos;
 using StandupTracker.Applications.Services.Authentication;
 using StandupTracker.Applications.Validations;
 using StandupTracker.Authentication;
+using StandupTracker.Exeptions;
+using StandupTracker.Menu;
+using StandupTracker.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,6 +35,33 @@ namespace StandupTracker
         public MainWindow()
         {
             InitializeComponent();
+
+            AuthenticationStore.SetAuthenticated(false);
+
+            menuControl.ItemsSource = MenuManager.menuItems;
+
+            AddStackPanelsToWindow();
+        }
+
+        private void AddStackPanelsToWindow()
+        {
+            foreach (View view in MenuManager.views)
+            {
+                Grid.SetRow(view.StackPanel, 1);
+                Grid.SetColumn(view.StackPanel, 0);
+                Grid.SetColumnSpan(view.StackPanel, 2);
+                windowLayout.Children.Add(view.StackPanel);
+            }
+        }
+
+        private void menuControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (menuControl.SelectedItem is not Menu.MenuItem menuItem)
+            {
+                throw new StackPanelNotFoundExeption();
+            }
+
+            MenuManager.ChangeView(menuItem);
         }
     }
 }
