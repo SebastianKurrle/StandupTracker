@@ -3,7 +3,7 @@
 namespace StandupTracker.Applications.Exeptions;
 
 [Serializable]
-internal class UserNotFoundExeption : Exception
+public class UserNotFoundExeption : Exception
 {
     public UserNotFoundExeption()
     {

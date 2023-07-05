@@ -17,6 +17,7 @@ public class UserManager
 
     private IMapper Mapper { get; }
     private UserCreateValidator CreateValidator { get; } 
+    private UserLoginValidator LoginValidator { get; }
 
     public UserManager()
     {
@@ -26,6 +27,7 @@ public class UserManager
         cfg.AddMaps(typeof(DtoEntityMapperProfile))).CreateMapper();
 
         CreateValidator = new UserCreateValidator();
+        LoginValidator = new UserLoginValidator();
 
         MenuManager.CreateUnauthenticatedMenu();
     }
@@ -48,6 +50,30 @@ public class UserManager
         catch
         {
             errors = "Ungültige Eingaben!";
+        }
+
+        return errors;
+    }
+
+    public string LoginUser(UserLogin userLogin)
+    {
+        AuthenticationLoginService loginService =
+            new AuthenticationLoginService(Mapper, LoginValidator);
+
+        string errors = string.Empty;
+
+        try
+        {
+            string token = loginService.LoginUser(userLogin);
+            AuthenticationStore.LoggedInUserToken = token;
+        }
+        catch (UserNotFoundExeption ex)
+        {
+            errors = "Der Benutzer wurde nicht gefunden\n" + ex.Message;
+        }
+        catch(IncorrectCredentialsException ex)
+        {
+            errors = "Falsches Passwort\n" + ex.Message;
         }
 
         return errors;

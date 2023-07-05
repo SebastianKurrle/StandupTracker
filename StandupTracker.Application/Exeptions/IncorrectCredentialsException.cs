@@ -3,7 +3,7 @@
 namespace StandupTracker.Applications.Exeptions;
 
 [Serializable]
-internal class IncorrectCredentialsException : Exception
+public class IncorrectCredentialsException : Exception
 {
     public IncorrectCredentialsException()
     {

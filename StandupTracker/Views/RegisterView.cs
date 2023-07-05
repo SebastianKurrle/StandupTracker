@@ -1,6 +1,7 @@
 ﻿using StandupTracker.Applications.Dtos;
 using StandupTracker.Authentication;
 using StandupTracker.Components;
+using StandupTracker.Menu;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -78,6 +79,8 @@ public class RegisterView : View
 
         ValidateResult(result);
         ClearInputs();
+
+        RedirectToLogin();
     }
 
     private void ValidateResult(string result)
@@ -93,5 +96,11 @@ public class RegisterView : View
         UsernameInput.UIElement.Text = string.Empty;
         PasswordInput.UIElement.Password = string.Empty;
         Password2Input.UIElement.Password = string.Empty;
+    }
+
+    private void RedirectToLogin()
+    {
+        MenuManager.ChangeView(
+            MenuManager.GetMenuItemByPanelName("loginStackPanel"));
     }
 }

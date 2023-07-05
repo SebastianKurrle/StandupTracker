@@ -33,6 +33,17 @@ public class MenuManager
         menuItems.Add(new MenuItem("Login", "loginStackPanel"));
     }
 
+    public static MenuItem GetMenuItemByPanelName(string panelName)
+    {
+        foreach (MenuItem item in menuItems)
+        {
+            if (item.PanelName == panelName)
+                return item;
+        }
+
+        throw new StackPanelNotFoundExeption();
+    }
+
     public static void ChangeView(MenuItem menuItem)
     {
         ClearViews();
