@@ -100,7 +100,8 @@ public class RegisterView : View
 
     private void RedirectToLogin()
     {
-        MenuManager.ChangeView(
-            MenuManager.GetMenuItemByPanelName("loginStackPanel"));
+        Menu.MenuItem item = MenuManager.GetMenuItemByPanelName("loginStackPanel");
+
+        MenuManager.ChangeView(item);
     }
 }
