@@ -20,5 +20,6 @@ class PasswordInput : IComponent
     public void Design()
     {
         UIElement.Width = 300;
+        UIElement.Padding = new Thickness(5);
     }
 }

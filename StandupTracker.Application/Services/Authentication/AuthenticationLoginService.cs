@@ -39,7 +39,7 @@ public class AuthenticationLoginService
         return token;
     }
 
-    public LoggedInUser GetLoggedInUserFromToken(string token)
+    public static LoggedInUser GetLoggedInUserFromToken(string token)
     {
         return JWTToken.GetLoggedInUserFromToken(token);
     }

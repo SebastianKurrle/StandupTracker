@@ -1,6 +1,7 @@
 ﻿using StandupTracker.Applications.Dtos;
 using StandupTracker.Authentication;
 using StandupTracker.Components;
+using StandupTracker.Menu;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -71,7 +72,10 @@ public class LoginView : View
         if (result != string.Empty)
         {
             ErrorLoginLabel.UIElement.Content = result;
+            return;
         }
+
+        MenuManager.CreateUserMenu();
     }
 
     private void ClearInputs()

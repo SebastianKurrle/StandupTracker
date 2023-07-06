@@ -22,5 +22,6 @@ class SubmitButton : IComponent
     {
         UIElement.Width = 300;
         UIElement.Margin = new Thickness(0, 10, 0, 0);
+        UIElement.Padding = new Thickness(5);
     }
 }

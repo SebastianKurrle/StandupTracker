@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Standuptracker.AuthenticationTokens.Dtos;
 using StandupTracker.Applications;
 using StandupTracker.Applications.Dtos;
 using StandupTracker.Applications.Exeptions;
 using StandupTracker.Applications.Services.Authentication;
 using StandupTracker.Applications.Validations;
 using StandupTracker.Components;
+using StandupTracker.Exeptions;
 using StandupTracker.Menu;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -14,6 +16,7 @@ namespace StandupTracker.Authentication;
 public class UserManager
 {
     public bool IsAuthenticated { get; set; }
+    public LoggedInUser CurrentUser { get; set; } = default!;
 
     private IMapper Mapper { get; }
     private UserCreateValidator CreateValidator { get; } 
@@ -66,6 +69,8 @@ public class UserManager
         {
             string token = loginService.LoginUser(userLogin);
             AuthenticationStore.LoggedInUserToken = token;
+            CurrentUser = AuthenticationLoginService.GetLoggedInUserFromToken(token);
+            AuthenticationStore.SetAuthenticated(true);
         }
         catch (UserNotFoundExeption ex)
         {
@@ -74,6 +79,10 @@ public class UserManager
         catch(IncorrectCredentialsException ex)
         {
             errors = "Falsches Passwort\n" + ex.Message;
+        }
+        catch
+        {
+            errors = "Ungütlige Eingaben";
         }
 
         return errors;

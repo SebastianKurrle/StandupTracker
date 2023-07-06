@@ -8,29 +8,73 @@ namespace StandupTracker.Menu;
 
 public class MenuManager
 {
+    public static Grid WindowLayout { get; set; } = default!;
+    public static ComboBox MenuControl { get; set; } = default!;
     public static readonly List<MenuItem> menuItems = new();
-    public static readonly List<View> views = new()
-    {
-        new RegisterView(new StackPanel()
-        {
-            Name = "registerStackPanel",
-            Visibility = Visibility.Collapsed,
-        }),
 
-        new LoginView(new StackPanel()
+    public static readonly List<View> views = new();
+
+    public static void AddStackPanelsToWindow()
+    {
+        foreach (View view in views)
         {
-            Name = "loginStackPanel",
-            Visibility = Visibility.Collapsed,
-        })
-    };
-    
+            Grid.SetRow(view.StackPanel, 1);
+            Grid.SetColumn(view.StackPanel, 0);
+            Grid.SetColumnSpan(view.StackPanel, 2);
+            WindowLayout.Children.Add(view.StackPanel);
+        }
+    }
+
     // Fills the menu items for a unauthenticated user
     public static void CreateUnauthenticatedMenu()
     {
+        ClearViews();
+        views.Clear();
+        views.Add(
+             new RegisterView(new StackPanel()
+             {
+                 Name = "registerStackPanel",
+                 Visibility = Visibility.Collapsed,
+             })
+        );
+        
+        views.Add(
+             new LoginView(new StackPanel()
+             {
+                 Name = "loginStackPanel",
+                 Visibility = Visibility.Collapsed,
+             })
+        );
+
         menuItems.Clear();
 
         menuItems.Add(new MenuItem("Registrieren", "registerStackPanel"));
         menuItems.Add(new MenuItem("Login", "loginStackPanel"));
+    }
+
+    public static void CreateUserMenu()
+    {
+        ClearViews();
+        views.Clear();
+        views.Add(
+            new HomeView(new StackPanel()
+            {
+                Name = "homeStackPanel",
+                Visibility = Visibility.Collapsed,
+            })
+        );
+
+        AddStackPanelsToWindow();
+
+        menuItems.Clear();
+
+        menuItems.Add(new MenuItem("Home", "homeStackPanel"));
+        menuItems.Add(new MenuItem("Neuer Track", "newTrackStackPanel"));
+        menuItems.Add(new MenuItem("Neuer Trackbenutzer", "newTrackuserStackPanel"));
+
+        MenuControl.ItemsSource = menuItems;
+        MenuControl.SelectedItem = GetMenuItemByPanelName("homeStackPanel");
+        MenuControl.Items.Refresh();
     }
 
     public static MenuItem GetMenuItemByPanelName(string panelName)
