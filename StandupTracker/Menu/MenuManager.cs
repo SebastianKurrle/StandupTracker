@@ -52,6 +52,14 @@ public class MenuManager
         menuItems.Add(new MenuItem("Login", "loginStackPanel"));
     }
 
+    public static void UserLogout()
+    {
+        CreateUnauthenticatedMenu();
+        AddStackPanelsToWindow();
+        MenuControl.SelectedItem = GetMenuItemByPanelName("loginStackPanel");
+        MenuControl.Items.Refresh();
+    }
+
     public static void CreateUserMenu()
     {
         ClearViews();

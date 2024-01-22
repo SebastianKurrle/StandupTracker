@@ -16,7 +16,7 @@ namespace StandupTracker.Authentication;
 public class UserManager
 {
     public bool IsAuthenticated { get; set; }
-    public LoggedInUser CurrentUser { get; set; } = default!;
+    public LoggedInUser? CurrentUser { get; set; } = default!;
 
     private IMapper Mapper { get; }
     private UserCreateValidator CreateValidator { get; } 
@@ -86,5 +86,13 @@ public class UserManager
         }
 
         return errors;
+    }
+
+    public void LogoutUser()
+    {
+        CurrentUser = null;
+        AuthenticationStore.LoggedInUserToken = "";
+        AuthenticationStore.SetAuthenticated(false);
+        MenuManager.UserLogout();
     }
 }
